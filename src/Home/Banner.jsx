@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import productData from "../products.json";
 import { Link } from "react-router-dom";
+import SelectedCategory from "../components/selectedCategory";
 
 const title = (
   <h2>
@@ -46,6 +47,7 @@ const Banner = () => {
         <div className="banner-content">
           {title}
           <form>
+            <SelectedCategory select={"all"} />
             <input
               type="text"
               name="search"
@@ -54,6 +56,9 @@ const Banner = () => {
               value={searcInput}
               onChange={handleSearch}
             />
+            <button type="submit">
+             <i className="icofont-search"></i>
+            </button>
           </form>
           <p>{desc}</p>
           <ul className="lab-ul">
