@@ -3,6 +3,7 @@ import Banner from './Banner'
 import HomeCategory from './HomeCategory'
 import CategoryShowCase from './CategoryShowCase'
 import Register from './Register'
+import LocationSpread from './LocationSpread'
 
 const Home = () => {
   return (
@@ -12,6 +13,7 @@ const Home = () => {
         <HomeCategory/>
         <CategoryShowCase/>
         <Register/>
+        <LocationSpread/>
       </div>
     </div>
   )
