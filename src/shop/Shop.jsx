@@ -2,12 +2,29 @@ import React, { useState } from "react";
 import Pagebanner from "../components/Pagebanner";
 import Data from "../products.json";
 import ProductCard from "./ProductCard";
+import Pagination from "./Pagination";
 
 const showResults = "Showing 01 - 12 of 130 Results";
 
 const Shop = () => {
   const [gridList, setGridList] = useState(true);
   const [products, setProducts] = useState(Data);
+
+//   pagination
+const [currentPage, setCurrentPage] = useState(1)
+const productsPerPage = 12;
+
+const indexOfLastProduct = currentPage * productsPerPage;
+const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+const currentProducts = products.slice(indexOfFirstProduct,indexOfLastProduct)
+
+
+//function to change the current page 
+
+const paginate = (pageNumber)=> {
+    setCurrentPage(pageNumber)
+}
+
 
   return (
     <div>
@@ -39,6 +56,12 @@ const Shop = () => {
                 <div>
                   <ProductCard gridList={gridList} products={products} />
                 </div>
+                <Pagination 
+                productsPerPage={productsPerPage}
+                totalProducts = {products.length}
+                paginate={paginate}
+                activePage={currentPage}
+                />
               </article>
             </div>
             <div className="col-lg-4 col-12">right side</div>

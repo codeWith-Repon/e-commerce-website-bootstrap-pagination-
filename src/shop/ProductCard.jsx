@@ -33,7 +33,7 @@ const ProductCard = ({ gridList, products }) => {
 
             <div className="prodct-content">
                 <h5>
-                    <Link to={`/shop/${product.id}`}>{product.name}</Link>
+                    <Link to={`/shop/${product.id}`} className="pt-3">{product.name}</Link>
                 </h5>
                 <p className="productRating">
                     <Ratting/>
