@@ -10,51 +10,67 @@ const Pagination = ({
   for (let i = 1; i <= Math.ceil(totalProducts / productsPerPage); i++) {
     pageNumbers.push(i);
   }
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 400,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <ul className="default-pagination lab-ul">
-    {/* privious button - hide if on the fist page */}
-    {activePage > 1 &&(
       <li>
         <a
           href="#"
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault();
             if (activePage > 1) {
               paginate(activePage - 1);
+              scrollToTop();
             }
           }}
+          disabled={activePage === 1}
+          className={activePage === 1 ? "disabled" : ""}
         >
           <i className="icofont-rounded-left"></i>
         </a>
       </li>
-    )}
 
-    {/* page number button  */}
+      {/* page number button  */}
       {pageNumbers.map((number) => (
         <li
           key={number}
           className={`page-item ${number === activePage ? "bg-warning" : ""}`}
         >
-          <button onClick={() => paginate(number)} className="bg-transparent">
+          <button
+            onClick={() => {
+              paginate(number);
+              scrollToTop();
+            }}
+            className="bg-transparent"
+          >
             {number}
           </button>
         </li>
       ))}
 
-      {/* next button -hide if no the last page  */}
-      {activePage < pageNumbers.length && (
       <li>
         <a
           href="#"
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault();
             if (activePage < pageNumbers.length) {
               paginate(activePage + 1);
+              scrollToTop();
             }
           }}
+          disabled={activePage === pageNumbers.length}
+          className={activePage === pageNumbers.length ? "disabled" : ""}
         >
           <i className="icofont-rounded-right"></i>
         </a>
       </li>
-      )}
     </ul>
   );
 };
