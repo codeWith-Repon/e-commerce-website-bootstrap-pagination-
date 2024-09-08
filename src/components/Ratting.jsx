@@ -2,7 +2,7 @@ import React from "react";
 
 const Ratting = () => {
   return (
-    <span>
+    <span className="ratting">
       <i className="icofont-ui-rating"></i>
       <i className="icofont-ui-rating"></i>
       <i className="icofont-ui-rating"></i>
