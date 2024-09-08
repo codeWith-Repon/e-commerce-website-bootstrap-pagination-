@@ -3,6 +3,7 @@ import Pagebanner from "../components/Pagebanner";
 import Data from "../products.json";
 import ProductCard from "./ProductCard";
 import Pagination from "./Pagination";
+import Search from "./Search";
 
 const showResults = "Showing 01 - 12 of 130 Results";
 
@@ -64,7 +65,11 @@ const paginate = (pageNumber)=> {
                 />
               </article>
             </div>
-            <div className="col-lg-4 col-12">right side</div>
+            <div className="col-lg-4 col-12">
+                <aside>
+                    <Search products={products} gridList={gridList} />
+                </aside>
+            </div>
           </div>
         </div>
       </div>
