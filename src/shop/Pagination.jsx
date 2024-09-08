@@ -12,6 +12,8 @@ const Pagination = ({
   }
   return (
     <ul className="default-pagination lab-ul">
+    {/* privious button - hide if on the fist page */}
+    {activePage > 1 &&(
       <li>
         <a
           href="#"
@@ -24,6 +26,9 @@ const Pagination = ({
           <i className="icofont-rounded-left"></i>
         </a>
       </li>
+    )}
+
+    {/* page number button  */}
       {pageNumbers.map((number) => (
         <li
           key={number}
@@ -34,6 +39,9 @@ const Pagination = ({
           </button>
         </li>
       ))}
+
+      {/* next button -hide if no the last page  */}
+      {activePage < pageNumbers.length && (
       <li>
         <a
           href="#"
@@ -46,6 +54,7 @@ const Pagination = ({
           <i className="icofont-rounded-right"></i>
         </a>
       </li>
+      )}
     </ul>
   );
 };
