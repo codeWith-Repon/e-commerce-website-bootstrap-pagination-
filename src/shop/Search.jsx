@@ -16,7 +16,8 @@ const Search = ({products,gridList}) => {
       {/* showing search result */}
       <div>
         {
-            searchTerm && filteredProducts.map((product)=>(
+            searchTerm && (
+                filteredProducts.length > 0 ? (filteredProducts.map((product)=>(
                 <Link key={product.id} to={`/shop/${product.id}`}>
                     <div className="d-flex gap-3 p-2">
                         <div>
@@ -33,7 +34,12 @@ const Search = ({products,gridList}) => {
                     </div>
                 </Link>
             ))
-        }
+        ) : (
+            <div className="text-center">
+                <h5>Product not found</h5>
+            </div>
+        )
+        )}
       </div>
     </div>
   )
