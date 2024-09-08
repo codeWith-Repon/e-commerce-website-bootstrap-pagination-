@@ -54,7 +54,7 @@ const paginate = (pageNumber)=> {
                 </div>
 
                 <div>
-                  <ProductCard gridList={gridList} products={products} />
+                  <ProductCard gridList={gridList} products={currentProducts} />
                 </div>
                 <Pagination 
                 productsPerPage={productsPerPage}

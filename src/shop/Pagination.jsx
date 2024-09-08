@@ -16,7 +16,7 @@ const Pagination = ({
         <a
           href="#"
           onClick={() => {
-            if (activePage < pageNumbers.length) {
+            if (activePage > 1) {
               paginate(activePage - 1);
             }
           }}
