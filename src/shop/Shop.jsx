@@ -6,6 +6,7 @@ import Pagination from "./Pagination";
 import Search from "./Search";
 import ShopCategory from "./ShopCategory";
 import PopularPost from "./PopularPost";
+import Tags from "./Tags";
 
 const showResults = "Showing 01 - 12 of 130 Results";
 
@@ -91,6 +92,7 @@ const filterItem = (currentCategory) => {
                     setSelectedCategory={setSelectedCategory}
                     />
                     <PopularPost/>
+                    <Tags/>
                 </aside>
             </div>
           </div>
