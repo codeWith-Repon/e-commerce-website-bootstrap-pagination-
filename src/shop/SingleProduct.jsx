@@ -2,6 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Pagebanner from '../components/Pagebanner';
 
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import { Autoplay } from 'swiper/modules';
+
 const SingleProduct = () => {
     const [product, setProduct] = useState([])
     const {id} = useParams();
@@ -27,7 +34,38 @@ const SingleProduct = () => {
                                 <div className="col-md-6 col-12">
                                     <div className="product-thumb">
                                         <div className="swiper-container pro-single-top">
-                                            
+                                        <Swiper
+                                        spaceBetween={30}
+                                        slidesPerView={1}
+                                        loop={"true"}
+                                        autoplay={{
+                                            delay: 2000,
+                                            disableOnInteraction: false
+                                        }}
+                                        modules={[Autoplay]}
+                                        navigation = {
+                                        {
+                                            prevEl: "./pro-single-prev",
+                                            nextEl: "./pro-single-next",
+                                        }
+                                        }
+                                        className="mySwiper">
+                                           {
+                                            result.map((item,index)=>(
+                                                <SwiperSlide key={index}>
+                                                    <div className="single-thumb">
+                                                        <img src={item.img} alt="" />
+                                                    </div>
+                                                </SwiperSlide>
+                                            ))
+                                           }
+                                        </Swiper>
+                                        <div className="pro-single-next">
+                                            <i className='icofont-rounded-left'></i>
+                                        </div>
+                                        <div className="pro-single-prev">
+                                            <i className='icofont-rounded-right'></i>
+                                        </div>
                                         </div>
                                     </div>
                                 </div>
