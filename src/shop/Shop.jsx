@@ -87,6 +87,7 @@ const filterItem = (currentCategory) => {
                     menuItems={menuItems}
                     setProducts={setProducts}
                     selectedCategory={selectedCategory}
+                    setSelectedCategory={setSelectedCategory}
                     />
                 </aside>
             </div>

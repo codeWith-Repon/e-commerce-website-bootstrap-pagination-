@@ -7,6 +7,7 @@ const ShopCategory = ({
   menuItems,
   setProducts,
   selectedCategory,
+  setSelectedCategory
 }) => {
   return (
     <>
@@ -14,7 +15,9 @@ const ShopCategory = ({
         <h5 className="ms-2">All Cagegories</h5>
       </div>
       <div>
-        <button onClick={() => setProducts(Data)}
+        <button onClick={() => {setProducts(Data);
+          setSelectedCategory("All")
+         }}
           className={`m-2 ${selectedCategory === "All" ? "bg-warning" : ""}`}
         >
           All
