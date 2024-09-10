@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { json, Link } from "react-router-dom";
 const desc =
   "Energistin an deliver atactica metrcs after avsionary Apropria trnsition enterpris an sources applications emerging psd template";
 
 const ProductDisplay = ({ item }) => {
-  const { name, id, price, seller, ratingsCount, quantity,img } = item;
+  const { name, id, price, seller, ratingsCount, quantity, img } = item;
 
   const [prequantity, setQuantity] = useState(quantity);
   const [coupon, setCoupon] = useState("");
@@ -39,11 +39,30 @@ const ProductDisplay = ({ item }) => {
       quantity: prequantity,
       size: size,
       color: color,
-      coupon: coupon
-    }
+      coupon: coupon,
+    };
     // console.log(product)
-    
-  }
+    const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    const existingProductIndex = existingCart.findIndex(
+      (item) => item.id === id
+    );
+
+    if (existingProductIndex !== -1) {
+      existingCart[existingProductIndex].quantity += prequantity;
+    } else {
+      existingCart.push(product);
+    }
+
+    //update local stroage
+    localStorage.setItem("cart", JSON.stringify(existingCart));
+
+    //reset from fields
+    setQuantity(1);
+    setSize("Select Size");
+    setColor("Select Color");
+    setCoupon("");
+  };
 
   return (
     <div>
@@ -62,64 +81,64 @@ const ProductDisplay = ({ item }) => {
         <p>{desc}</p>
       </div>
       <div>
-        <form  onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <div className="d-flex my-3 ">
-          <div className="select-product size me-3">
-            <select value={size} onChange={handleSizeChange}>
-              <option>Select Size</option>
-              <option>SM</option>
-              <option>MD</option>
-              <option>LG</option>
-              <option>XL</option>
-              <option>XXL</option>
-            </select>
-          </div>
-          <div className="select-product color">
-            <select value={color} onChange={handleColorChange}>
-              <option>Select Color</option>
-              <option>Pink</option>
-              <option>Ash</option>
-              <option>Red</option>
-              <option>White</option>
-              <option>Blue</option>
-              <option>Blck</option>
-            </select>
-          </div>
-          </div>
-        
-        <div className="d-flex align-items-center gap-2">
-          <div className="cart-plus-minus mx-0">
-            <div className="dec qtybutton" onClick={handleDecrise}>
-              -
+            <div className="select-product size me-3">
+              <select value={size} onChange={handleSizeChange}>
+                <option>Select Size</option>
+                <option>SM</option>
+                <option>MD</option>
+                <option>LG</option>
+                <option>XL</option>
+                <option>XXL</option>
+              </select>
             </div>
-            <input
-              className="cart-plus-minus-box"
-              type="text"
-              name="qtybutton"
-              id="qtybutton"
-              value={prequantity}
-              onChange={(e) => setQuantity(parseInt(e.target.value, 10))}
-            />
-            <div className="inc qtybutton" onClick={handleIncrise}>
-              +
+            <div className="select-product color">
+              <select value={color} onChange={handleColorChange}>
+                <option>Select Color</option>
+                <option>Pink</option>
+                <option>Ash</option>
+                <option>Red</option>
+                <option>White</option>
+                <option>Blue</option>
+                <option>Blck</option>
+              </select>
             </div>
           </div>
-          <div className="discount-code">
-            <input
-              type="text"
-              placeholder="Enter Discount Code"
-              onChange={(e) => setCoupon(e.target.value)}
-            />
+
+          <div className="d-flex align-items-center gap-2">
+            <div className="cart-plus-minus mx-0">
+              <div className="dec qtybutton" onClick={handleDecrise}>
+                -
+              </div>
+              <input
+                className="cart-plus-minus-box"
+                type="text"
+                name="qtybutton"
+                id="qtybutton"
+                value={prequantity}
+                onChange={(e) => setQuantity(parseInt(e.target.value, 10))}
+              />
+              <div className="inc qtybutton" onClick={handleIncrise}>
+                +
+              </div>
+            </div>
+            <div className="discount-code">
+              <input
+                type="text"
+                placeholder="Enter Discount Code"
+                onChange={(e) => setCoupon(e.target.value)}
+              />
+            </div>
           </div>
-        </div>
-        <div className="gap-4 d-flex mt-4">
-          <button type="submit" className="lab-btn">
-            <span>Add to Cart</span>
-          </button>
-          <Link to="/cart-page" className="lab-btn bg-primary">
-            <span>Check Out</span>
-          </Link>
-        </div>
+          <div className="gap-4 d-flex mt-4">
+            <button type="submit" className="lab-btn">
+              <span>Add to Cart</span>
+            </button>
+            <Link to="/cart-page" className="lab-btn bg-primary">
+              <span>Check Out</span>
+            </Link>
+          </div>
         </form>
       </div>
     </div>
